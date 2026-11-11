@@ -24,8 +24,6 @@ Um chatbot corporativo precisa agilizar a vida do usuário e, ao mesmo tempo, se
 
 Desenvolvido para a plataforma de cursos **RDX**, este projeto demonstra como construir uma solução de IA robusta e segura sem complicar a arquitetura além do necessário.
 
-Combinando **segurança na camada de aplicação** e **engenharia de prompt defensiva**, o sistema entrega respostas limpas e estritamente alinhadas ao domínio do negócio:
-
 - 🛡️ **Sanitização Dupla (Input/Output)**: Tratamento e validação de mensagens na entrada e na saída para impedir execução de código malicioso.
 - 🎯 **Engenharia de Prompt Precisa**: Instruções de sistema refinadas para manter o assistente estritamente focado no escopo da plataforma RDX.
 - 🎛️ **Controle Fino de Temperatura**: Ajuste de hiperparâmetros no **Gemini AI SDK** para reduzir alucinações e manter respostas diretas e previsíveis.
@@ -33,7 +31,7 @@ Combinando **segurança na camada de aplicação** e **engenharia de prompt defe
 
 ## 💡 Veja em Ação
 
-O sistema foi submetido a testes de estresse defensivo ("Red Teaming" simulado):
+O sistema foi submetido a esses testes de estresse:
 
 - **Teste 1 (Desvio de Escopo)**: Solicitada uma receita de bolo de cenoura 🥕 -> Recusado de forma educada, mantendo o escopo nos cursos RDX.
 - **Teste 2 (Injeção de Código)**: Envio de scripts maliciosos tentando capturar dados -> Sanitizado e neutralizado.
