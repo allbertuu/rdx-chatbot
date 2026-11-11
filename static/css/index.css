@@ -1,201 +1,274 @@
 @import url(_reset.css);
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  /* Paleta GitHub Dark Mode + Red Accent (Agradável) */
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --border-color: #30363d;
+
+  /* Textos com alto contraste conforme WCAG */
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --text-placeholder: #6e7681;
+
+  /* Destaque em Vermelho Suave */
+  --accent-red: #e55353;
+  --accent-red-hover: #d84343;
+  --accent-red-subtle: rgba(229, 83, 83, 0.15);
+}
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    background: linear-gradient(to bottom, #01080E, #041832);
-    color: #FFFFFF;
-    font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* Impede qualquer scroll horizontal no documento */
 }
 
 .container {
-    padding: 0 2rem;
+  padding: 0 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 @media screen and (min-width: 1400px) {
-    .container {
-        padding: 0 calc((100vw - 1200px) / 2);
-    }
+  .container {
+    padding: 0 2rem;
+    max-width: 1100px;
+  }
 }
 
 .cabecalho {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 5rem;
-    border-bottom: 1px solid #144480;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
 }
 
 .cabecalho__acoes {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-@media screen and (min-width: 1400px) {
-    .cabecalho__acoes {
-        gap: 2.8125rem;
-    }
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .chat {
-    display: flex;
-    flex-direction: column;
-    max-height: calc(100vh - 10rem - 5rem);
-
-    scrollbar-width: none;
-    overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem 3rem; /* Aumentado o padding horizontal para acomodar os ícones de 2rem fora da bolha */
+  max-height: calc(100vh - 4.5rem - 6.5rem);
+  overflow-y: auto;
+  overflow-x: hidden; /* Elimina a barra de rolagem horizontal */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
 }
 
 .chat::-webkit-scrollbar {
-    display: none;
+  width: 6px;
 }
 
+.chat::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 3px;
+}
+
+/* Base das Bolhas de Chat */
 .chat__bolha {
-    max-width: calc(100% - 3.5rem);
-    width: fit-content;
-    padding: 1.5rem;
-    border-radius: 10px;
-    font-size: 1.375rem;
-    margin: 1.5rem 0;
-    position: relative;
+  max-width: 85%;
+  width: fit-content;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  position: relative;
+  word-break: break-word;
 }
 
-@media screen and (min-width: 1400px){
-    .chat__bolha {
-        max-width: 60%;
-    }
+@media screen and (min-width: 768px) {
+  .chat__bolha {
+    max-width: 70%;
+  }
 }
 
+/* Bolha do Bot (IA do Curso) */
 .chat__bolha--bot {
-    background-color: #4A42B8;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
 }
 
 .chat__bolha--bot::after {
-    content: "";
-    display: block;
-
-    height: 2.5rem;
-    width: 2.5rem;
-
-    position: absolute;
-    top: 0;
-    right: calc(-2.5rem - 1rem);
-
-    background-image: url(../img/icone-chatbot.svg);
-    background-repeat: no-repeat;
-    background-position: center;
+  content: "";
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: -2.5rem;
+  background-image: url(../img/icone-chatbot.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
+/* Bolha do Usuário (Destaque Marca) */
 .chat__bolha--usuario {
-    border: 1px solid #7B71FF;
-    align-self: flex-end;
+  background-color: var(--accent-red);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+  box-shadow: 0 4px 12px rgba(229, 83, 83, 0.2);
 }
 
 .chat__bolha--usuario::before {
-    content: "";
-    display: block;
-
-    height: 2.5rem;
-    width: 2.5rem;
-
-    position: absolute;
-    top: 0;
-    left: calc(-2.5rem - 1rem);
-
-    background-image: url(../img/icone-perfil.svg);
-    background-repeat: no-repeat;
-    background-position: center;
+  content: "";
+  display: block;
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  bottom: 0;
+  right: -2.5rem;
+  background-image: url(../img/icone-perfil.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
+/* Área de Entrada de Mensagem */
 .entrada {
-    height: 10rem;
-    position: relative;
-    display: flex;
-    gap: 1.5rem;
-    justify-content: stretch;
-    align-items: center;
-    border-top: 1px solid #144480;
+  height: 6.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
 }
 
 .entrada__container {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem 0.5rem 1.25rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
 
-    padding: 0 0.5rem;
-
-    background-color: #144480;
-    border: 1px solid #0C305C;
-    border-radius: 4rem;
+.entrada__container:focus-within {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px var(--accent-red-subtle);
 }
 
 .entrada__input {
-    height: 4rem;
-    width: 100%;
-
-    background-color: transparent;
-    font-size: 1.375rem;
-    color: #FFFFFF;
-    padding-left: 20px;
+  height: 2.75rem;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: var(--text-primary);
 }
 
 .entrada__input::placeholder {
-    color: #FFFFFF;
+  color: var(--text-placeholder);
 }
 
 .entrada__enviar-audio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  height: 2.75rem;
+  width: 2.75rem;
+  background-color: var(--accent-red);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
 
-    height: 4rem;
-    width: 4rem;
+.entrada__enviar-audio:hover {
+  background-color: var(--accent-red-hover);
+}
 
-    background-color: #1C5296;
-    border: 1px solid #0C305C;
-    border-radius: 50%;
+.entrada__enviar-audio:active {
+  transform: scale(0.95);
 }
 
 .entrada__feedback {
-    position: absolute;
-    bottom: 23px;
-    right: calc(2rem + 5.5rem);
+  position: absolute;
+  top: -1.5rem;
+  left: 2rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
 }
 
-@media screen and (min-width: 1400px) {
-    .entrada__feedback {
-        right: calc((100vw - 1200px) / 2 + 5.5rem);
-    }
-}
-
+/* Utilitários de Ícone */
 .icone {
-    display: inline-block;
-    height: 4rem;
-    width: 4rem;
-    background-position: center;
-    background-repeat: no-repeat;
+  display: inline-block;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .icone--enviar-audio {
-    background-image: url(../img/icone-audio.svg);
+  background-image: url(../img/icone-audio.svg);
 }
 
 .icone--mais-opcoes {
-    background-image: url(../img/icone-mais.svg);
+  background-image: url(../img/icone-mais.svg);
 }
 
 .icone--enviar-mensagem {
-    background-image: url(../img/icone-enviar.svg);
+  background-image: url(../img/icone-enviar.svg);
+}
+
+@media screen and (max-width: 400px) {
+  /* Remove os ícones laterais do bot e do usuário */
+  .chat__bolha--bot::after,
+  .chat__bolha--usuario::before {
+    display: none;
+  }
+
+  /* Reduz o padding lateral do container do chat para aproveitar a tela */
+  .chat {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Permite que o balão ocupe até 90% da largura em telas muito pequenas */
+  .chat__bolha {
+    max-width: 90%;
+  }
 }
